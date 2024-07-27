@@ -1,7 +1,15 @@
+import os
+import signal
+
 from flask import Flask, request, jsonify
 from db_connector import get_user, create_user, update_user, delete_user
 
 app = Flask(__name__)
+
+@app.route('/stop_server', methods=['GET'])
+def stop_server():
+    os.kill(os.getpid(), signal.CTRL_C_EVENT)
+    return 'Server shutting down...'
 
 @app.route('/users/<user_id>', methods=['POST'])
 def create_user_endpoint(user_id):
@@ -40,4 +48,11 @@ def delete_user_endpoint(user_id):
         return jsonify({"status": "error", "reason": str(e)}), 500
 
 if __name__ == '__main__':
+    import sys
+    if len(sys.argv) > 1:
+        db_user = sys.argv[1]
+        db_pass = sys.argv[2]
+    else:
+        db_user = os.environ['DB_USER']
+        db_pass = os.environ['DB_PASS']
     app.run(debug=True)
