@@ -13,6 +13,14 @@ pipeline {
     }
 
     stages {
+        stage('Cleanup') {
+                steps {
+                    script {
+                        sh 'fuser -k 5000/tcp || true'
+                        sh 'fuser -k 5001/tcp || true'
+                    }
+                }
+        }
         stage('Pull code') {
             steps {
                 git branch: 'main', url: 'git@github.com:mariyayurlova/devOpsProject.git'
