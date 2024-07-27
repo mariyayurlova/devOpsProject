@@ -18,6 +18,14 @@ pipeline {
                 git branch: 'main', url: 'git@github.com:mariyayurlova/devOpsProject.git'
             }
         }
+        stage('Setup Python Environment') {
+            steps {
+                script {
+                    sh 'python3 -m venv venv'
+                    sh '. venv/bin/activate && pip install -r requirements.txt'
+                }
+            }
+        }
         stage('Run backend') {
             steps {
                 script {
