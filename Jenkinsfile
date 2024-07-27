@@ -63,7 +63,7 @@ pipeline {
     }
     post {
         failure {
-            mail to: 'your-email@example.com',
+            mail to: 'mariya.yurlova@gmail.com',
                  subject: "Pipeline failed on ${env.BUILD_TAG}",
                  body: "The Jenkins pipeline failed. Please check the logs for more details."
         }
