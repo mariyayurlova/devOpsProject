@@ -21,42 +21,42 @@ pipeline {
         stage('Run backend') {
             steps {
                 script {
-                    sh 'python rest_app.py'
+                    sh 'nohup python rest_app.py &'
                 }
             }
         }
         stage('Run frontend') {
             steps {
                 script {
-                    sh 'python web_app.py'
+                    sh 'nohup python web_app.py &'
                 }
             }
         }
         stage('Run backend tests') {
             steps {
                 script {
-                    sh 'python backend_testing.py'
+                    sh 'nohup python backend_testing.py &'
                 }
             }
         }
         stage('Run frontend tests') {
             steps {
                 script {
-                    sh 'python frontend_testing.py'
+                    sh 'nohup python frontend_testing.py &'
                 }
             }
         }
         stage('Run combined tests') {
             steps {
                 script {
-                    sh 'python combined_testing.py'
+                    sh 'nohup python combined_testing.py &'
                 }
             }
         }
         stage('Clean environment') {
             steps {
                 script {
-                    sh 'python clean_environment.py'
+                    sh 'nohup python clean_environment.py &'
                 }
             }
         }
