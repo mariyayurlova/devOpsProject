@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Pull code') {
             steps {
-                git 'git@github.com:mariyayurlova/devOpsProject.git'
+                git branch: 'main', url: 'git@github.com:mariyayurlova/devOpsProject.git'
             }
         }
         stage('Run backend') {
